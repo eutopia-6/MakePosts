@@ -2,18 +2,27 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
 
     <div class="navBarBackground">
         <a href="{{ url_for('index') }}" class="Home">Home</a>
-        <a href="{{ url_for('makePost') }}" class="MakePost">Make Post</a>
-        <a href="{{ url_for('posts') }}" class="Posts">Posts</a>
+        <a href="{{ url_for('createPost') }}" class="createPost">Create Post</a>
     </div>
 
     <h1 class="titles">Posts</h1>
+
+    <p class="">{{ post['title'] }}</p>
+    <span class="">Posted: {{ post['timeCreated'] }}</span>
+    <br><br>
+    <p class="">{{ post['fileName'] }}</p>
+    <a style="" href="{{ url_for('download', post_id=post['id']) }}">
+            <button type="button" class="">Download File</button></a>
+    <br><br>
+    <p class="">{{ post['content'] }}</p>
+
 
 </body>
 

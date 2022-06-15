@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(24, 24, 24) ;
+    background-color: white ;
 }
 
 .navBarBackground{
@@ -35,7 +35,7 @@ body{
     
 }
 
-.MakePost{
+.createPost{
     font-family: monospace;
     color: white;
     text-decoration: none;

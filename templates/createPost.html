@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="navBarBackground">
+        <a href="{{ url_for('index') }}" class="Home">Home</a>
+        <a href="{{ url_for('createPost') }}" class="createPost">Create Post</a>
+    </div>
+
+
+<form class="form-control" method="POST" enctype="multipart/form-data">
+
+    <div class="titles">
+        <h1>Create Post</h1>
+    </div>
+
+    <div class="">
+        <label id="title">Title</label>
+        <input type="text" name="title"
+               placeholder="Post title"
+               value="{{ request.form['title'] }}">
+    </div>
+
+    <div class="">
+        <label id="file">File</label>
+        <input type="file" name="file">
+    </div>
+
+    <div class="">
+        <label id="content">Content</label>
+        <br>
+        <textarea style="width:100%" name="content" rows="12"
+                  placeholder="Post content">{{ request.form['content'] }}</textarea>
+    </div>
+
+    <div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+</form>
+
+</body>
+
+</html>
