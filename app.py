@@ -6,6 +6,8 @@ from io import BytesIO
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
+app.config['SECRET_KEY'] = "b'\x00\xb4\x8d\xbe\xf8\xa3\x1e;l\xf4,\x12'"
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///MakePosts.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
