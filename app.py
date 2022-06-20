@@ -2,6 +2,7 @@ from flask import Flask, render_template, flash, redirect, request, session, url
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import TIMESTAMP, func
 from io import BytesIO
+import base64
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -46,7 +47,19 @@ def index():
 @app.route("/<int:post_id>")
 def posts(post_id):
     postID = Posts.query.filter_by(id=post_id).first()
+    # media = send_file(BytesIO(postID.fileData), download_name=postID.fileName)
+    # media = base64.b64encode(BytesIO(postID.fileData).getvalue())
+
+    # media = base64.b64encode(postID.fileData).decode('utf-8')
+
     return render_template('posts.html', post=postID)
+
+
+# display the file of a blog post
+@app.route("/<int:post_id>/display")
+def display(post_id):
+    postID = Posts.query.filter_by(id=post_id).first()
+    return send_file(BytesIO(postID.fileData), download_name=postID.fileName)
 
 
 # download a post's file
