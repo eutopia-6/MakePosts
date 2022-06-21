@@ -2,7 +2,6 @@ from flask import Flask, render_template, flash, redirect, request, session, url
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import TIMESTAMP, func
 from io import BytesIO
-import base64
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -43,14 +42,17 @@ def index():
     return render_template('index.html', posts=allPosts)
 
 
+@app.route("/database")
+def database():
+    allPosts = Posts.query.all()
+
+    return render_template('fileDataBase.html', posts=allPosts)
+
+
 # view a blog post
 @app.route("/<int:post_id>")
 def posts(post_id):
     postID = Posts.query.filter_by(id=post_id).first()
-    # media = send_file(BytesIO(postID.fileData), download_name=postID.fileName)
-    # media = base64.b64encode(BytesIO(postID.fileData).getvalue())
-
-    # media = base64.b64encode(postID.fileData).decode('utf-8')
 
     return render_template('posts.html', post=postID)
 
@@ -59,6 +61,7 @@ def posts(post_id):
 @app.route("/<int:post_id>/display")
 def display(post_id):
     postID = Posts.query.filter_by(id=post_id).first()
+
     return send_file(BytesIO(postID.fileData), download_name=postID.fileName)
 
 
@@ -66,6 +69,7 @@ def display(post_id):
 @app.route("/<int:post_id>/download")
 def download(post_id):
     postID = Posts.query.filter_by(id=post_id).first()
+
     return send_file(BytesIO(postID.fileData), attachment_filename=postID.fileName, as_attachment=True)
 
 
