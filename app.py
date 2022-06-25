@@ -38,6 +38,8 @@ def clear_trailing():
 @app.route("/")
 def index():
     allPosts = Posts.query.all()
+    allPosts.reverse()
+
 
     return render_template('index.html', posts=allPosts)
 
