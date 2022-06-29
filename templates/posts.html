@@ -1,18 +1,30 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
 
-{% block body %}
+<head>
+    <link rel = "stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel = "import" >
+</head>
 
-    <h1>{{ post['title'] }}</h1>
-    <span class="text-muted">Posted: {{ post['timeCreated'] }}</span>
-    <br><br>
-    <p class="fs-6 text-muted">File: {{ post['fileName'] }}</p>
-    <a style="float:left" href="{{ url_for('display', post_id=post['id']) }}">
-            <button type="button" class="btn btn-outline-primary">View File</button></a>
+<body>
 
-    <a style="float:left" href="{{ url_for('download', post_id=post['id']) }}">
-            <button type="button" class="btn btn-outline-primary">Download File</button></a>
+    <div>
+        <a href = "{{ url_for('index')}}">
+            <div class = "button button1">
+            Home
+            </div>
+        </a>
+    </div>
+    <div>
+        {% for post in Posts %}   
+       <div>
+            
+            <img src="data:image/;base64,{{post}}" style="width: 100%; height: 100%;">
 
-    <br><br>
-    <p class="fs-6">{{ post['content'] }}</p>
+            {% endfor %}
+        </div>
+    </div>
 
-{% endblock body %}
+</body>
+
+</html>

@@ -1,23 +1,26 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
 
-{% block body %}
+<head>
+<link rel = "stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
 
-<h1>{% block title %} Posts {% endblock %}</h1>
-<br>
+<body>
 
-    <div class="d-grid gap-2 d-md-block">
-        {% for post in posts %}
-        <a style="float:left" href="{{ url_for('posts', post_id=post['id']) }}">
-            <button type="button" class="btn btn-outline-primary">{{ post['title'] }}</button>
+    <div class = "centered">
+        <a href="{{ url_for('makePost')}}">
+            <div class = "button button1">
+            Make A Post
+            </div>
         </a>
-        <br><br>
-        <span class="text-start">Posted: {{ post['timeCreated'] }}</span>
-        <hr>
-        {% endfor %}
+        <a href = "{{ url_for('posts')}}">
+            <div class = "button button2">
+            Posts
+            </div>
+        </a>
     </div>
 
-    {% endblock body %}
 
+</body>
 
-
-
+</html>
